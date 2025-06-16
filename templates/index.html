@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Disease Prediction</title>
+</head>
+<body>
+    <h2>Disease Predictor</h2>
+    <form action="/predict" method="post">
+        <label>Fever (1 or 0):</label><input type="text" name="Fever"><br>
+        <label>Fatigue (1 or 0):</label><input type="text" name="Fatigue"><br>
+        <label>Headache (1 or 0):</label><input type="text" name="Headache"><br>
+        <input type="submit" value="Predict">
+    </form>
+    <h3>{{ prediction_text }}</h3>
+</body>
+</html>

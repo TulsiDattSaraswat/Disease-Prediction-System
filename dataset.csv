@@ -1,0 +1,6 @@
+Fever,Fatigue,Headache,Disease
+1,1,0,Flu
+1,0,1,Common Cold
+0,1,1,Migraine
+1,1,1,Typhoid
+0,0,1,Tension Headache
