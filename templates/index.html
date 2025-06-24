@@ -1,16 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Disease Prediction</title>
+    <meta charset="UTF-8">
+    <title>Disease Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #007bff;
+            font-size: 24px;
+        }
+
+        label {
+            font-weight: 500;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            margin-bottom: 10px;
+            border-radius: 6px;
+            padding: 6px;
+            border: 1px solid #ced4da;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .prediction-label {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            margin-top: 15px;
+        }
+
+        .prediction-result {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .healthy {
+            color: green;
+        }
+
+        .disease {
+            color: red;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <h2>Disease Predictor</h2>
-    <form action="/predict" method="post">
-        <label>Fever (1 or 0):</label><input type="text" name="Fever"><br>
-        <label>Fatigue (1 or 0):</label><input type="text" name="Fatigue"><br>
-        <label>Headache (1 or 0):</label><input type="text" name="Headache"><br>
-        <input type="submit" value="Predict">
-    </form>
-    <h3>{{ prediction_text }}</h3>
+    <div class="container">
+        <h2>Disease Predictor</h2>
+        <form action="/predict" method="post">
+            <label>Fever (1 or 0):</label>
+            <input type="text" name="Fever" required>
+
+            <label>Fatigue (1 or 0):</label>
+            <input type="text" name="Fatigue" required>
+
+            <label>Headache (1 or 0):</label>
+            <input type="text" name="Headache" required>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+            <div class="prediction-label">Predicted Disease:</div>
+            <div class="prediction-result {% if 'healthy' in prediction_text|lower %}healthy{% else %}disease{% endif %}">
+                {{ prediction_text.split(":")[-1].strip() }}
+            </div>
+        {% endif %}
+
+        <footer>
+            Made with ❤️ using Flask & Machine Learning
+        </footer>
+    </div>
 </body>
 </html>
